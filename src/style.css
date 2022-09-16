@@ -9,8 +9,6 @@
 
 .background {
 	position: fixed;
-	width: 100vw;
-	top: -133px;
 	z-index: -1;
 	pointer-events: none;
 	filter: brightness(65%);
@@ -78,6 +76,10 @@ main {
 	font-size: 4rem;
 }
 
+.weather::first-letter, .city::first-letter {
+	text-transform: capitalize;
+}
+
 .city {
 	font-size: 2.25rem;
 }
@@ -110,4 +112,11 @@ footer {
 .additional {
 	display: flex;
 	justify-content: space-around;
+}
+
+@media only screen and (min-width: 1437px){
+	.background {
+		width: 100vw;
+		top: -133px;
+	}
 }
