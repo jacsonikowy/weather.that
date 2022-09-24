@@ -3,6 +3,7 @@
 * {
 	padding: 0;
 	margin: 0;
+	box-sizing: border-box;
 	font-family: 'Rambla';
 	color: white;
 }
@@ -65,6 +66,7 @@ main {
 	justify-content: center;
 	align-content: center;
 	text-align: center;
+	min-height: 55vh;
 }
 
 .info {
@@ -101,9 +103,10 @@ main {
 }
 
 footer {
-	position: absolute;
+	position: relative;
+	left: 0;
 	bottom: 0;
-	width: 100%;
+	width: 100vw;
 	height: 2.5rem;
 	font-size: 1.2rem;
 	margin-bottom: 2em;
@@ -112,6 +115,12 @@ footer {
 .additional {
 	display: flex;
 	justify-content: space-around;
+}
+
+.weather-img {
+	margin-top: -2em;
+	height: 10em;
+	width: 10em;
 }
 
 @media only screen and (min-width: 1437px){

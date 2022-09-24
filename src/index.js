@@ -63,7 +63,7 @@ function gettingApiData(lat,lon){
 function displayIcons(response){
 	const image = document.querySelector(".weather-img")
 
-	let url = `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`
+	let url = `http://openweathermap.org/img/wn/${response.weather[0].icon}@4x.png`
 
 	image.src=url
 }
