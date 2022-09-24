@@ -13,9 +13,39 @@ const feelsLike = document.querySelector(".feels-like")
 const windSpeed = document.querySelector(".wind-speed")
 const pressure = document.querySelector(".pressure")
 
+
 var cityName = ""
 var lat = 0;
 var lon = 0;
+
+// on Load
+window.addEventListener("load", (e) => {
+	startup()
+})
+
+// Listeners
+const searchBtn = document.querySelector(".searchBtn")
+const locationSearch = document.querySelector(".locationSearch") 
+
+locationSearch.addEventListener("keypress", (e) => {
+	if(e.key === "Enter"){
+		getLatAndLon(locationSearch.value)
+		displayDateAndTime()
+	}
+})
+
+searchBtn.addEventListener("click", (e) => {
+	if(e.target){
+		getLatAndLon(locationSearch.value)
+		displayDateAndTime()
+	}
+})
+
+// Functions
+function startup(){
+		getLatAndLon("Auckland")
+		displayDateAndTime()
+}
 
 function getLatAndLon(city){
 	fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`, {mode: 'cors'})
@@ -108,10 +138,3 @@ function displayDateAndTime(){
 	date_desc.textContent = `${weekday}, ${day}th ${month} ${year}`
 	hour_desc.textContent = `${hour}:${minute}`
 }
-
-displayDateAndTime()
-
-getLatAndLon("Sydney")
-
-
-console.log(lon)
