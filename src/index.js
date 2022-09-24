@@ -17,7 +17,6 @@ var cityName = ""
 var lat = 0;
 var lon = 0;
 
-
 function getLatAndLon(city){
 	fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`, {mode: 'cors'})
 		.then(response => {
@@ -53,10 +52,20 @@ function gettingApiData(lat,lon){
 			humidity.textContent = "Humidity: " + response.main.humidity + "%"
 			windSpeed.textContent = "Wind Speed: " + response.wind.speed + "m/s"
 			pressure.textContent = "Pressure: " + response.main.pressure + "hPa"
+
+			displayIcons(response)
 		})
 		.catch(error => {
 			console.log("Something Wrong happened")
 		})
+}
+
+function displayIcons(response){
+	const image = document.querySelector(".weather-img")
+
+	let url = `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`
+
+	image.src=url
 }
 
 function displayDateAndTime(){
