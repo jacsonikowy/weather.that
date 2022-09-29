@@ -30,7 +30,7 @@ export function gettingApiData(latitude, longitude) {
       weatherDesc.textContent = response.weather[0].description;
       cityDesc.textContent = cityName;
       temperature.textContent = `${parseInt(response.main.temp, 10)}°C`;
-      feelsLike.textContent = `Feels Like: ${parseInt(response.main.feels_like, 10)}°C`;
+      feelsLike.textContent = `Feels: ${parseInt(response.main.feels_like, 10)}°C`;
       humidity.textContent = `Humidity: ${response.main.humidity}%`;
       windSpeed.textContent = `Wind Speed: ${response.wind.speed}m/s`;
       pressure.textContent = `Pressure: ${response.main.pressure}hPa`;
