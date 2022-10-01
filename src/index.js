@@ -1,8 +1,17 @@
 import * as handle from './apiHandling.js';
 
 // html paragraphs for information
+
 const dateDesc = document.querySelector('.date');
 const hourDesc = document.querySelector('.hour');
+
+const temperature = document.querySelector('.temperature');
+const humidity = document.querySelector('.humidity');
+const feelsLike = document.querySelector('.feels-like');
+const windSpeed = document.querySelector('.wind-speed');
+const pressure = document.querySelector('.pressure');
+const weatherDesc = document.querySelector('.weather');
+const cityDesc = document.querySelector('.city');
 
 // Functions
 function displayDateAndTime() {
@@ -45,8 +54,21 @@ function displayDateAndTime() {
   hourDesc.textContent = `${hour}:${minute}`;
 }
 
-function startup() {
-  handle.getLatAndLon('Auckland');
+function displayOnPageData(response, cityName) {
+  weatherDesc.textContent = response.weather[0].description;
+  cityDesc.textContent = cityName;
+  temperature.textContent = `${parseInt(response.main.temp, 10)}°C`;
+  feelsLike.textContent = `Feels: ${parseInt(response.main.feels_like, 10)}°C`;
+  humidity.textContent = `Humidity: ${response.main.humidity}%`;
+  windSpeed.textContent = `Wind Speed: ${response.wind.speed}m/s`;
+  pressure.textContent = `Pressure: ${response.main.pressure}hPa`;
+
+  handle.displayIcons(response);
+}
+
+async function startup() {
+  const { weatherData, cityName } = await handle.getLatAndLon('Auckland');
+  displayOnPageData(weatherData, cityName);
   displayDateAndTime();
 }
 
@@ -59,16 +81,18 @@ window.addEventListener('load', () => {
 const searchBtn = document.querySelector('.searchBtn');
 const locationSearch = document.querySelector('.locationSearch');
 
-locationSearch.addEventListener('keypress', (e) => {
+locationSearch.addEventListener('keypress', async (e) => {
   if (e.key === 'Enter') {
-    handle.getLatAndLon(locationSearch.value);
+    const { weatherData, cityName } = await handle.getLatAndLon(locationSearch.value);
+    displayOnPageData(weatherData, cityName);
     displayDateAndTime();
   }
 });
 
-searchBtn.addEventListener('click', (e) => {
+searchBtn.addEventListener('click', async (e) => {
   if (e.target) {
-    handle.getLatAndLon(locationSearch.value);
+    const { weatherData, cityName } = await handle.getLatAndLon(locationSearch.value);
+    displayOnPageData(weatherData, cityName);
     displayDateAndTime();
   }
 });
